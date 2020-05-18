@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CF861C5B-5B54-4135-8F88-32F63FBF49A6}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
+    <ProjectName>StarterKit</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,7 +41,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir);$(SDL_SDK)\include;$(SDL_IMAGE_SDK)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SDL_SDK)\include;$(SDL_IMAGE_SDK)\include;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>$(SDL_SDK)\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -48,13 +49,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\devtools\SDL\SDL2-devel-2.0.0-VC\SDL2-2.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src\headers;$(ProjectDir)\Dependencies\SDL\include;$(ProjectDir)\Dependencies\SDL2_image\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\devtools\SDL\SDL2-devel-2.0.0-VC\SDL2-2.0.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)\Dependencies\SDL\lib\x86\SDL2.lib;$(ProjectDir)\Dependencies\SDL\lib\x86\SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -73,12 +74,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
+    <Xml Include="Levels.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Debug.h" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="playerObject.cpp" />
+    <ClCompile Include="src\cpp\Game.cpp" />
+    <ClCompile Include="src\cpp\GameObject.cpp" />
+    <ClCompile Include="src\cpp\GameObjectFactory.cpp" />
+    <ClCompile Include="src\cpp\GameObjectParameters.cpp" />
+    <ClCompile Include="src\cpp\Layer.cpp" />
+    <ClCompile Include="src\cpp\Level.cpp" />
+    <ClCompile Include="src\cpp\main.cpp" />
+    <ClCompile Include="src\cpp\Player.cpp" />
+    <ClCompile Include="src\cpp\PlayerFactory.cpp" />
+    <ClCompile Include="src\cpp\TileLayer.cpp" />
+    <ClCompile Include="src\cpp\TinyXML2.cpp" />
+    <ClCompile Include="src\cpp\Vector2D.cpp" />
+    <ClCompile Include="Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="map.h" />
+    <ClInclude Include="playerObject.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="src\headers\AbstractFactory.h" />
+    <ClInclude Include="src\headers\Debug.h" />
+    <ClInclude Include="src\headers\Game.h" />
+    <ClInclude Include="src\headers\GameObject.h" />
+    <ClInclude Include="src\headers\GameObjectFactory.h" />
+    <ClInclude Include="src\headers\GameObjectParameters.h" />
+    <ClInclude Include="src\headers\Layer.h" />
+    <ClInclude Include="src\headers\Level.h" />
+    <ClInclude Include="src\headers\LevelParser.h" />
+    <ClInclude Include="src\headers\Player.h" />
+    <ClInclude Include="src\headers\PlayerFactory.h" />
+    <ClInclude Include="src\headers\TinyXML2.h" />
+    <ClInclude Include="src\headers\Vector2D.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
